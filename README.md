@@ -14,7 +14,11 @@ To use the Shadowserver API client, you will need to first create an authenticat
 ```
 from shadowserver.auth import ShadowserverAuth
 
-auth = ShadowserverAuth('YOUR_API_KEY', 'YOUR_SECRET_KEY')
+
+SHADOWSERVER_API_KEY="SHADOWSERVER_API_KEY"
+SHADOWSERVER_SECRET="SHADOWSERVER_SECRET"
+
+auth = ShadowserverAuth('SHADOWSERVER_API_KEY', 'SHADOWSERVER_SECRET')
 ```
 
 Once you have an authentication object, you can create instances of the ShadowserverReportAPI, ShadowserverASNAPI, and ShadowserverSSLAPI classes to access the various API endpoints:
@@ -24,9 +28,11 @@ from shadowserver.report_api import ShadowserverReportAPI
 from shadowserver.asn_api import ShadowserverASNAPI
 from shadowserver.ssl_api import ShadowserverSSLAPI
 
-report_api = ShadowserverReportAPI('https://api.shadowserver.org/', auth)
-asn_api = ShadowserverASNAPI('https://api.shadowserver.org/', auth)
-ssl_api = ShadowserverSSLAPI('https://api.shadowserver.org/', auth)
+SHADOWSERVER_URI="https://transform.shadowserver.org/api2/"
+
+report_api = ShadowserverReportAPI(SHADOWSERVER_URI, auth)
+asn_api = ShadowserverASNAPI(SHADOWSERVER_URI, auth)
+ssl_api = ShadowserverSSLAPI(SHADOWSERVER_URI, auth)
 ```
 
 You can then use the methods of these API classes to interact with the Shadowserver API endpoints. For example, to retrieve a list of available reports, you can use the list method of the ShadowserverReportAPI class:

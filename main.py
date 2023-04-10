@@ -3,10 +3,14 @@ from shadowserver.report_api import ShadowserverReportAPI
 from shadowserver.asn_api import ShadowserverASNAPI
 from shadowserver.ssl_api import ShadowserverSSLAPI
 
-auth = ShadowserverAuth('YOUR_API_KEY', 'YOUR_SECRET_KEY')
-report_api = ShadowserverReportAPI('https://api.shadowserver.org/', auth)
-asn_api = ShadowserverASNAPI('https://api.shadowserver.org/', auth)
-ssl_api = ShadowserverSSLAPI('https://api.shadowserver.org/', auth)
+SHADOWSERVER_API_KEY="SHADOWSERVER_API_KEY"
+SHADOWSERVER_SECRET="SHADOWSERVER_SECRET"
+SHADOWSERVER_URI="https://transform.shadowserver.org/api2/"
+
+auth = ShadowserverAuth('SHADOWSERVER_API_KEY', 'SHADOWSERVER_SECRET')
+report_api = ShadowserverReportAPI(SHADOWSERVER_URI, auth)
+asn_api = ShadowserverASNAPI(SHADOWSERVER_URI, auth)
+ssl_api = ShadowserverSSLAPI(SHADOWSERVER_URI, auth)
 
 # Example report API usage
 types = report_api.types()
@@ -17,6 +21,28 @@ print(f"Subscribed reports: {subscribed}")
 
 reports = report_api.list(latest=True)
 print(f"Latest report: {reports}")
+
+# Get the last 5 reports
+report_api.list(limit=5)
+
+# Get the ID of the most recent report
+report_info = reports[0] if reports else {}
+report_id = report_info.get('id')
+print(report_id)
+
+# Get a list of available reports for the authenticated user
+reports_list = report_api.list()
+
+# Loop through the list and download each report
+for report_info in reports_list:
+    print(report_info.get('type'))
+    report_id = report_info.get('id')
+    print(report_id)
+    response = api.reports_download(report_id)
+    print(response)
+    # do something with the downloaded report, such as write it to a file
+    # e.g. with open(report_id + '.json', 'w') as f:
+    #          f.write(json.dumps(response))
 
 report_id = "REPORT_UUID"
 report_data = report_api.download(report_id)
