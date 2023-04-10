@@ -54,4 +54,4 @@ This code is licensed under the MIT License. Please see the LICENSE file for mor
 Pull requests and bug reports are welcome! Please see the CONTRIBUTING file for more information.
 
 ## Contact
-If you have any questions or concerns about this project, please contact us at support@shadowserver.org.
+If you have any questions or concerns about shadowserer APIs, please contact us at support@shadowserver.org.
